@@ -1,0 +1,95 @@
+﻿@model IEnumerable<RepositoryPattern.Infrastructure.Models.UserDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css" />
+
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#UserDetail_tbl').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "ajax": {
+                    "url": "/UserDetail/GetUserDetail",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columnDefs": [{
+                    "visible": false,
+                    "searchable": false
+                }],
+                "columns": [
+                    { "data": "name", "name": "Name", "autoWidth": true },
+                    { "data": "email", "name": "Email", "autoWidth": true },
+                    { "data": "webSite", "name": "WebSite", "autoWidth": true },
+                    { "data": "address", "name": "Address", "autoWidth": true },
+                    {
+                        "render": function (val, type, obj) {
+                            return "<a class='btn btn-warning' href='/UserDetail/Edit/" + obj.id + "'>Edit</a> | <a class='btn btn-primary' href='/UserDetail/Details/" + obj.id + "'>Details</a> | <a class='btn btn-danger' href='/UserDetail/Delete/" + obj.id + "'>Delete</a>"
+                        }
+                    }
+                ]
+            })
+        })
+    </script>
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="UserDetail_tbl" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WebSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WebSite)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.id">Details</a> |
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    </td>
+                </tr>
+            }*@
+    </tbody>
+</table>

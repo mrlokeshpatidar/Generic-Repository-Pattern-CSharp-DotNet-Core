@@ -31,6 +31,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="UserDetail" asp-action="Index">User Detail</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
@@ -44,7 +45,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2021 - RepositoryPattern</p>
+            <p>&copy; @DateTime.Now.Year - Repository Pattern <a href="https://www.mrlokesh.com/"><b>Developed by MrLokesh</b></a></p>
         </footer>
     </div>
 

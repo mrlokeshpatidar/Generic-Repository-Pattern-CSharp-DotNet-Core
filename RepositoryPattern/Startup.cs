@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RepositoryPattern.Infrastructure;
+using RepositoryPattern.Service;
+using RepositoryPattern.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace RepositoryPattern
 {
@@ -30,7 +34,8 @@ namespace RepositoryPattern
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddDbContext<UserDetailContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IUserDetail, UserDetailRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
